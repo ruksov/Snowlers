@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6d6af6016ad4a25b2aab55405b8127, type: 3}
   m_Name: InputReader
   m_EditorClassIdentifier: 
+  m_changeDirectionChannel: {fileID: 11400000, guid: 7da1be406cf194177a63b148156cff5a, type: 2}
+  m_sharpChangeDirectionChannel: {fileID: 11400000, guid: aa0b2064d2b7c4576a701a3b483e3a86, type: 2}

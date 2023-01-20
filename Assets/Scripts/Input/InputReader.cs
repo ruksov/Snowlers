@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class InputReader : ScriptableObject, GameInput.IGameplayActions
 {
     // Events
-    public UnityEvent changeDirectionEvent;
-    public UnityEvent sharpChangeDirectionEvent;
+    [SerializeField] private VoidEventChannelSO m_changeDirectionChannel = default;
+    [SerializeField] private VoidEventChannelSO m_sharpChangeDirectionChannel = default;
 
     // Members
     private GameInput m_gameInput;
@@ -31,13 +31,14 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
     public void OnChangeDirection(InputAction.CallbackContext context)
     {
         if(context.phase == InputActionPhase.Started &&
-            changeDirectionEvent != null)
+            m_changeDirectionChannel != null)
         {
-            changeDirectionEvent.Invoke();
+            m_changeDirectionChannel.RaiseEvent();
         }
-        else if(context.phase == InputActionPhase.Performed)
+        else if(context.phase == InputActionPhase.Performed &&
+            m_sharpChangeDirectionChannel != null)
         {
-            sharpChangeDirectionEvent.Invoke();
+            m_sharpChangeDirectionChannel.RaiseEvent();
         }
     }
 }
