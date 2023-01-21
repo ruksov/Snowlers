@@ -6,7 +6,7 @@
             "id": "e8aedb34-9457-4baf-8d37-73337beb517a",
             "actions": [
                 {
-                    "name": "ChangeDirection",
+                    "name": "Turn",
                     "type": "Button",
                     "id": "ed0716af-946b-4b84-ad3c-f6b6112a68ab",
                     "expectedControlType": "Button",
@@ -23,7 +23,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "ChangeDirection",
+                    "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -34,7 +34,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Mobile",
-                    "action": "ChangeDirection",
+                    "action": "Turn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

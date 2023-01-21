@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24e3db96c0a184467959cc754d46d610, type: 3}
-  m_Name: ChangeDirectionEvent_Channel
+  m_Name: SharpTurnEvent_Channel
   m_EditorClassIdentifier: 

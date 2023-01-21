@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344217d126b324917b5422cec21bfad4, type: 3}
-  m_Name: PlayerMoveSpeed
+  m_Script: {fileID: 11500000, guid: 24e3db96c0a184467959cc754d46d610, type: 3}
+  m_Name: TurnEvent_Channel
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
-  Value: {x: 5, y: 0, z: 0}

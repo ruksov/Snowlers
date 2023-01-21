@@ -2,12 +2,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Vector3Variable m_moveVector;
+    [SerializeField] private PlayerContext m_playerContext = default;
 
-    public void OnChangeDirection()
+    private PlayerStateMachine m_stateMachine;
+
+    private void Awake()
     {
-        Vector3 newMoveVector = m_moveVector.Value;
-        newMoveVector.x = -newMoveVector.x;
-        m_moveVector.SetValue(newMoveVector);
+        m_stateMachine = new PlayerStateMachine(m_playerContext);
+    }
+
+    private void Update()
+    {
+        m_stateMachine.Update();
+        Move();
+    }
+
+    private void Move()
+    {
+        transform.position += m_playerContext.moveVector * Time.deltaTime;
     }
 }

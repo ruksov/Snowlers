@@ -28,7 +28,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             ""id"": ""e8aedb34-9457-4baf-8d37-73337beb517a"",
             ""actions"": [
                 {
-                    ""name"": ""ChangeDirection"",
+                    ""name"": ""Turn"",
                     ""type"": ""Button"",
                     ""id"": ""ed0716af-946b-4b84-ad3c-f6b6112a68ab"",
                     ""expectedControlType"": ""Button"",
@@ -45,7 +45,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""ChangeDirection"",
+                    ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -56,7 +56,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
-                    ""action"": ""ChangeDirection"",
+                    ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -78,7 +78,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_ChangeDirection = m_Gameplay.FindAction("ChangeDirection", throwIfNotFound: true);
+        m_Gameplay_Turn = m_Gameplay.FindAction("Turn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -138,12 +138,12 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_ChangeDirection;
+    private readonly InputAction m_Gameplay_Turn;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ChangeDirection => m_Wrapper.m_Gameplay_ChangeDirection;
+        public InputAction @Turn => m_Wrapper.m_Gameplay_Turn;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -153,16 +153,16 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @ChangeDirection.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeDirection;
-                @ChangeDirection.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeDirection;
-                @ChangeDirection.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnChangeDirection;
+                @Turn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
+                @Turn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
+                @Turn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @ChangeDirection.started += instance.OnChangeDirection;
-                @ChangeDirection.performed += instance.OnChangeDirection;
-                @ChangeDirection.canceled += instance.OnChangeDirection;
+                @Turn.started += instance.OnTurn;
+                @Turn.performed += instance.OnTurn;
+                @Turn.canceled += instance.OnTurn;
             }
         }
     }
@@ -187,6 +187,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     }
     public interface IGameplayActions
     {
-        void OnChangeDirection(InputAction.CallbackContext context);
+        void OnTurn(InputAction.CallbackContext context);
     }
 }
