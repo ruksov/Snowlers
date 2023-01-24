@@ -28,9 +28,27 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             ""id"": ""e8aedb34-9457-4baf-8d37-73337beb517a"",
             ""actions"": [
                 {
+                    ""name"": ""Tap"",
+                    ""type"": ""Button"",
+                    ""id"": ""79a84219-8620-435c-8094-5aefbfcb3057"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Turn"",
                     ""type"": ""Button"",
-                    ""id"": ""ed0716af-946b-4b84-ad3c-f6b6112a68ab"",
+                    ""id"": ""f84760ee-14a2-444c-87c1-f9bb146da135"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SharpTurn"",
+                    ""type"": ""Button"",
+                    ""id"": ""c9636ef0-a0ed-4247-9f8d-7e43752ba068"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
@@ -40,7 +58,51 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""896588cd-84dc-43bd-aa73-c49d3e38a822"",
+                    ""id"": ""0cd3b2ff-0917-4c8d-b50f-e243e1a9d6f6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SharpTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9d5a8ed-dc74-46a1-b940-7e461f923a78"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""SharpTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""273d57dc-e5b8-46cb-8fd5-4563c0946283"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4921530f-6679-4f58-a74d-79b6878e70b3"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Tap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63798e2d-9353-4018-bac9-a8311b8d9884"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -51,7 +113,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f1f11f23-2a68-4108-9a87-355570979238"",
+                    ""id"": ""241b656c-ff6e-43ed-bdd3-b3969dbfb76b"",
                     ""path"": ""<Touchscreen>/primaryTouch/tap"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -78,7 +140,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
+        m_Gameplay_Tap = m_Gameplay.FindAction("Tap", throwIfNotFound: true);
         m_Gameplay_Turn = m_Gameplay.FindAction("Turn", throwIfNotFound: true);
+        m_Gameplay_SharpTurn = m_Gameplay.FindAction("SharpTurn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -138,12 +202,16 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
+    private readonly InputAction m_Gameplay_Tap;
     private readonly InputAction m_Gameplay_Turn;
+    private readonly InputAction m_Gameplay_SharpTurn;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Tap => m_Wrapper.m_Gameplay_Tap;
         public InputAction @Turn => m_Wrapper.m_Gameplay_Turn;
+        public InputAction @SharpTurn => m_Wrapper.m_Gameplay_SharpTurn;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -153,16 +221,28 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
+                @Tap.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
+                @Tap.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
+                @Tap.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
                 @Turn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
                 @Turn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
                 @Turn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
+                @SharpTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
+                @SharpTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
+                @SharpTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Tap.started += instance.OnTap;
+                @Tap.performed += instance.OnTap;
+                @Tap.canceled += instance.OnTap;
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
+                @SharpTurn.started += instance.OnSharpTurn;
+                @SharpTurn.performed += instance.OnSharpTurn;
+                @SharpTurn.canceled += instance.OnSharpTurn;
             }
         }
     }
@@ -187,6 +267,8 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     }
     public interface IGameplayActions
     {
+        void OnTap(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
+        void OnSharpTurn(InputAction.CallbackContext context);
     }
 }

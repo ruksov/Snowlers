@@ -6,9 +6,27 @@
             "id": "e8aedb34-9457-4baf-8d37-73337beb517a",
             "actions": [
                 {
+                    "name": "Tap",
+                    "type": "Button",
+                    "id": "79a84219-8620-435c-8094-5aefbfcb3057",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Turn",
                     "type": "Button",
-                    "id": "ed0716af-946b-4b84-ad3c-f6b6112a68ab",
+                    "id": "f84760ee-14a2-444c-87c1-f9bb146da135",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SharpTurn",
+                    "type": "Button",
+                    "id": "c9636ef0-a0ed-4247-9f8d-7e43752ba068",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -18,7 +36,51 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "896588cd-84dc-43bd-aa73-c49d3e38a822",
+                    "id": "0cd3b2ff-0917-4c8d-b50f-e243e1a9d6f6",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SharpTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9d5a8ed-dc74-46a1-b940-7e461f923a78",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "SharpTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "273d57dc-e5b8-46cb-8fd5-4563c0946283",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4921530f-6679-4f58-a74d-79b6878e70b3",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "Tap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63798e2d-9353-4018-bac9-a8311b8d9884",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -29,7 +91,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f1f11f23-2a68-4108-9a87-355570979238",
+                    "id": "241b656c-ff6e-43ed-bdd3-b3969dbfb76b",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
                     "processors": "",
