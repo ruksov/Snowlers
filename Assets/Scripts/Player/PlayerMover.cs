@@ -19,6 +19,9 @@ public class PlayerMover : MonoBehaviour
 
     public Settings m_settings;
 
+    public Vector3 MoveVector => m_moveVector;
+    public Vector3 MoveDirection => m_moveVector.normalized;
+
     private IInputService m_inputService;
 
     private bool m_isRightSide;
@@ -27,12 +30,14 @@ public class PlayerMover : MonoBehaviour
     private float m_turnTime;
     private float m_startTurnTime;
     private float m_startTurnSpeedX;
+    private bool m_isStopped;
+    private Vector3 m_moveVector;
 
-    public bool IsInTurnState => m_startTurnTime > 0.0f;
+    private bool IsInTurnState => m_startTurnTime > 0.0f;
 
-    public float MaxSppedX => m_isRightSide ? m_settings.maxSpeedX : -m_settings.maxSpeedX;
-    public float SharpMaxSppedX => m_isRightSide ? m_settings.sharpMaxSpeedX : -m_settings.sharpMaxSpeedX;
-    public float CurrentMaxSpeedX => m_isSharpTurn ? SharpMaxSppedX : MaxSppedX;
+    private float MaxSppedX => m_isRightSide ? m_settings.maxSpeedX : -m_settings.maxSpeedX;
+    private float SharpMaxSppedX => m_isRightSide ? m_settings.sharpMaxSpeedX : -m_settings.sharpMaxSpeedX;
+    private float CurrentMaxSpeedX => m_isSharpTurn ? SharpMaxSppedX : MaxSppedX;
 
     [Inject]
     private void Construct(IInputService _inputService)
@@ -43,8 +48,13 @@ public class PlayerMover : MonoBehaviour
         m_inputService.OnSharpTurn += OnSharpTurn;
 
         m_isRightSide = Random.Range(0, 2) == 0;
+        m_isSharpTurn = false;
+
         m_speedX = MaxSppedX;
+        m_turnTime = m_settings.turnTime;
         m_startTurnTime = 0.0f;
+        m_startTurnSpeedX = 0.0f;
+        m_isStopped = false;
     }
 
     private void OnDestroy()
@@ -53,14 +63,31 @@ public class PlayerMover : MonoBehaviour
         m_inputService.OnSharpTurn -= OnSharpTurn;
     }
 
+    public void StopMove()
+    {
+        m_isStopped = true;
+    }
+
     private void Update()
     {
-        if(IsInTurnState)
+        if (m_isStopped)
+            return;
+
+        if (IsInTurnState)
         {
             ProcessTurn();
         }
 
-        transform.position += new Vector3(m_speedX, m_settings.speedY) * Time.deltaTime;
+        UpdateMoveVector();
+
+        transform.position += m_moveVector;
+    }
+
+    void UpdateMoveVector()
+    {
+        m_moveVector.x = m_speedX;
+        m_moveVector.y = m_settings.speedY;
+        m_moveVector *= Time.deltaTime;
     }
 
     private void ProcessTurn()
