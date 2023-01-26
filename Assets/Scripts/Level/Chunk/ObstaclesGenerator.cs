@@ -1,20 +1,21 @@
 using System.Collections.Generic;
+using Snowlers.Common.Extensions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Snowlers.Level
+namespace Snowlers.Level.Chunk
 {
     public class ObstaclesGenerator : MonoBehaviour
     {
-        [SerializeField] private GameObject m_obstaclePrefab;
-        [SerializeField] private float m_obstaclesCountRatio;
-        [SerializeField] private Vector2Int m_chunkSize;
+        [SerializeField] private Chunk m_chunk;
         
-        private const string m_kContainerObjectName = "Obstacles";
-        private GameObject m_containerObject;
+        private const string m_kObstaclesContainerName = "Obstacles";
 
+        private GameObject m_obstaclesContainer;
         private readonly List<Vector2Int> m_occupiedPositions = new();
-        
+
+        private ChunkData ChunkData => m_chunk.Data;
+
         private void OnEnable()
         {
             CreateContainerObject();
@@ -26,29 +27,30 @@ namespace Snowlers.Level
             DestroyContainerObject();
         }
         
-        public void GenerateObstacles()
+        private void GenerateObstacles()
         {
-            int obstaclesCount = Mathf.FloorToInt((m_chunkSize.x * m_chunkSize.y) * m_obstaclesCountRatio);
+            int obstaclesCount = Mathf.FloorToInt((ChunkData.size.x * ChunkData.size.y) * ChunkData.obstaclesCountRatio);
+            
             for (int i = 0; i < obstaclesCount; ++i)
             {
                 Vector2Int freePosition = GenerateRandomFreePosition();
                 m_occupiedPositions.Add(freePosition);
-                
-                GameObject obstacle = Instantiate(m_obstaclePrefab, m_containerObject.transform);
-                obstacle.transform.localPosition = new Vector3(freePosition.x, freePosition.y);
+
+                Instantiate(ChunkData.obstaclePrefab, m_obstaclesContainer.transform)
+                    .With(_obstacle => _obstacle.transform.localPosition = new Vector3(freePosition.x, freePosition.y));
             }
         }
 
         private void CreateContainerObject()
         {
-            m_containerObject = new GameObject(m_kContainerObjectName);
-            m_containerObject.transform.SetParent(transform, false);
-            m_containerObject.transform.localPosition += Vector3.left * m_chunkSize.x * 0.5f;
+            m_obstaclesContainer = new GameObject(m_kObstaclesContainerName)
+                .With(_go => _go.transform.SetParent(transform, false))
+                .With(_go => _go.transform.localPosition += Vector3.left * ChunkData.size.x * 0.5f);
         }
         
         private void DestroyContainerObject()
         {
-            Destroy(m_containerObject);
+            Destroy(m_obstaclesContainer);
         }
 
         private Vector2Int GenerateRandomFreePosition()
@@ -57,8 +59,8 @@ namespace Snowlers.Level
             
             do
             {
-                freePosition.x = Random.Range(0, m_chunkSize.x);
-                freePosition.y = -Random.Range(0, m_chunkSize.y);
+                freePosition.x = Random.Range(0, ChunkData.size.x);
+                freePosition.y = -Random.Range(0, ChunkData.size.y);
             } 
             while (m_occupiedPositions.Contains(freePosition));
 
