@@ -38,9 +38,9 @@ namespace Snowlers.Player
 
         private bool IsInTurnState => m_startTurnTime > 0.0f;
 
-        private float MaxSppedX => m_isRightSide ? m_settings.maxSpeedX : -m_settings.maxSpeedX;
-        private float SharpMaxSppedX => m_isRightSide ? m_settings.sharpMaxSpeedX : -m_settings.sharpMaxSpeedX;
-        private float CurrentMaxSpeedX => m_isSharpTurn ? SharpMaxSppedX : MaxSppedX;
+        private float MaxSpeedX => m_isRightSide ? m_settings.maxSpeedX : -m_settings.maxSpeedX;
+        private float SharpMaxSpeedX => m_isRightSide ? m_settings.sharpMaxSpeedX : -m_settings.sharpMaxSpeedX;
+        private float CurrentMaxSpeedX => m_isSharpTurn ? SharpMaxSpeedX : MaxSpeedX;
 
         [Inject]
         private void Construct(IInputService _inputService)
@@ -53,7 +53,7 @@ namespace Snowlers.Player
             m_isRightSide = Random.Range(0, 2) == 0;
             m_isSharpTurn = false;
 
-            m_speedX = MaxSppedX;
+            m_speedX = MaxSpeedX;
             m_turnTime = m_settings.turnTime;
             m_startTurnTime = 0.0f;
             m_startTurnSpeedX = 0.0f;
