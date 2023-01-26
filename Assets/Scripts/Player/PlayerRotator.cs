@@ -1,20 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
-[RequireComponent(typeof(PlayerMover))]
-public class PlayerRotator : MonoBehaviour
+namespace Snowlers.Player
 {
-    private PlayerMover m_mover;
-
-    private void Awake()
+    public class PlayerRotator : MonoBehaviour
     {
-        m_mover = GetComponent<PlayerMover>();
-    }
+        [SerializeField] private PlayerMover m_mover;
 
-    private void Update()
-    {
-        Vector3 moveDirection = m_mover.MoveDirection;
-        if (moveDirection != Vector3.zero)
+        private void Update()
         {
+            Vector3 moveDirection = m_mover.MoveDirection;
+            if (moveDirection == Vector3.zero) 
+                return;
+            
             float angle = Mathf.Atan2(moveDirection.x, -moveDirection.y) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }

@@ -1,31 +1,35 @@
+using Snowlers.Input;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class BootInstaller : MonoInstaller, IInitializable
+namespace Snowlers.Installers
 {
-    private const string m_kSceneName = "Game";
-
-    public override void InstallBindings()
+    public class BootInstaller : MonoInstaller, IInitializable
     {
-        BindInstallerInterfaces();
-        BindInputService();
-    }
+        private const string m_kSceneName = "Game";
 
-    private void BindInstallerInterfaces()
-    {
-        Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
-    }
+        public override void InstallBindings()
+        {
+            BindInstallerInterfaces();
+            BindInputService();
+        }
 
-    private void BindInputService()
-    {
-        Container.Bind<IInputService>().To<DefaultInputService>().AsSingle().NonLazy();
-    }
+        private void BindInstallerInterfaces()
+        {
+            Container.BindInterfacesTo<BootInstaller>().FromInstance(this).AsSingle();
+        }
 
-    public void Initialize()
-    {
-        if (SceneManager.GetActiveScene().name == m_kSceneName)
-            return;
+        private void BindInputService()
+        {
+            Container.Bind<IInputService>().To<DefaultInputService>().AsSingle().NonLazy();
+        }
 
-        SceneManager.LoadScene(m_kSceneName);
+        public void Initialize()
+        {
+            if (SceneManager.GetActiveScene().name == m_kSceneName)
+                return;
+
+            SceneManager.LoadScene(m_kSceneName);
+        }
     }
 }

@@ -1,18 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(PlayerMover))]
-public class ObstaclesTrigger : MonoBehaviour
+namespace Snowlers.Player
 {
-    private PlayerMover m_mover;
-
-    private void Awake()
+    [RequireComponent(typeof(Collider2D))]
+    public class ObstaclesTrigger : MonoBehaviour
     {
-        m_mover = GetComponent<PlayerMover>();
-    }
+        [SerializeField] private PlayerMover m_mover;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        m_mover.StopMove();
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            m_mover.StopMove();
+        }
     }
 }

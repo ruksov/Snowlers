@@ -124,8 +124,8 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1184912519
-  m_SortingLayer: 4
+  m_SortingLayerID: -1628890373
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Time: 3
   m_Parameters:
@@ -248,7 +248,7 @@ MonoBehaviour:
     maxSpeedX: 8
     turnTime: 0.5
     sharpMaxSpeedX: 16
-    sharpTurnTime: 0.5
+    sharpTurnTime: 0.4
 --- !u!114 &8348895151139542303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3f5d2ad9e2b4562b359ebd1782ebdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mover: {fileID: 4074738135891656647}
 --- !u!114 &1191847381091958827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90be25070ef34711b9a40adaf0839a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_mover: {fileID: 4074738135891656647}
 --- !u!58 &4774800932078917126
 CircleCollider2D:
   m_ObjectHideFlags: 0

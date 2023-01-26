@@ -1,48 +1,50 @@
 ﻿using System;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class DefaultInputService : IInputService, GameInput.IGameplayActions
+namespace Snowlers.Input
 {
-    public event Action OnTap;
-    public event Action OnTurn;
-    public event Action OnSharpTurn;
-
-    private GameInput m_gameInput;
-
-    public DefaultInputService()
+    public class DefaultInputService : IInputService, GameInput.IGameplayActions
     {
-        m_gameInput = new();
-        m_gameInput.Gameplay.SetCallbacks(this);
-        Enable();
-    }
+        public event Action OnTap;
+        public event Action OnTurn;
+        public event Action OnSharpTurn;
 
-    public void Enable()
-    {
-        m_gameInput.Enable();
-    }
+        private readonly GameInput m_gameInput;
 
-    public void Disable()
-    {
-        m_gameInput.Disable();
-    }
+        public DefaultInputService()
+        {
+            m_gameInput = new();
+            m_gameInput.Gameplay.SetCallbacks(this);
+            Enable();
+        }
 
-    void GameInput.IGameplayActions.OnTap(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-            OnTap?.Invoke();
-    }
+        public void Enable()
+        {
+            m_gameInput.Enable();
+        }
 
-    void GameInput.IGameplayActions.OnTurn(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-            OnTurn?.Invoke();
-    }
+        public void Disable()
+        {
+            m_gameInput.Disable();
+        }
 
-    void GameInput.IGameplayActions.OnSharpTurn(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-            OnSharpTurn?.Invoke();
+        void GameInput.IGameplayActions.OnTap(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                OnTap?.Invoke();
+        }
+
+        void GameInput.IGameplayActions.OnTurn(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                OnTurn?.Invoke();
+        }
+
+        void GameInput.IGameplayActions.OnSharpTurn(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+                OnSharpTurn?.Invoke();
+        }
     }
 }
 
