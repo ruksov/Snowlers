@@ -28,97 +28,72 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
             ""id"": ""e8aedb34-9457-4baf-8d37-73337beb517a"",
             ""actions"": [
                 {
-                    ""name"": ""Tap"",
+                    ""name"": ""StartTurn"",
                     ""type"": ""Button"",
-                    ""id"": ""79a84219-8620-435c-8094-5aefbfcb3057"",
+                    ""id"": ""c180e6c0-6176-4064-9371-ecd1cf66343a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Turn"",
+                    ""name"": ""StopTurn"",
                     ""type"": ""Button"",
-                    ""id"": ""f84760ee-14a2-444c-87c1-f9bb146da135"",
+                    ""id"": ""2cd2e86d-6f96-4d88-8df3-d001fe26a6aa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SharpTurn"",
-                    ""type"": ""Button"",
-                    ""id"": ""c9636ef0-a0ed-4247-9f8d-7e43752ba068"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""0cd3b2ff-0917-4c8d-b50f-e243e1a9d6f6"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""941c27a6-3655-4b7e-b148-fa28cfd330ae"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""SharpTurn"",
+                    ""groups"": """",
+                    ""action"": ""StartTurn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c9d5a8ed-dc74-46a1-b940-7e461f923a78"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""id"": ""28540d29-dbf1-4a6b-831a-fbef46e78cd2"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""8c5b54fa-ecc8-44c6-9cca-05085d53eddb"",
+            ""actions"": [
+                {
+                    ""name"": ""Tap"",
+                    ""type"": ""Button"",
+                    ""id"": ""917041ca-922a-4194-b465-0119bf73e0b9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Tap"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""394a8f44-cce7-421e-b25a-59d48f87bccd"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
-                    ""action"": ""SharpTurn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""273d57dc-e5b8-46cb-8fd5-4563c0946283"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
                     ""action"": ""Tap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4921530f-6679-4f58-a74d-79b6878e70b3"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mobile"",
-                    ""action"": ""Tap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""63798e2d-9353-4018-bac9-a8311b8d9884"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""241b656c-ff6e-43ed-bdd3-b3969dbfb76b"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mobile"",
-                    ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -126,11 +101,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         }
     ],
     ""controlSchemes"": [
-        {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
-            ""devices"": []
-        },
         {
             ""name"": ""Mobile"",
             ""bindingGroup"": ""Mobile"",
@@ -140,9 +110,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Tap = m_Gameplay.FindAction("Tap", throwIfNotFound: true);
-        m_Gameplay_Turn = m_Gameplay.FindAction("Turn", throwIfNotFound: true);
-        m_Gameplay_SharpTurn = m_Gameplay.FindAction("SharpTurn", throwIfNotFound: true);
+        m_Gameplay_StartTurn = m_Gameplay.FindAction("StartTurn", throwIfNotFound: true);
+        m_Gameplay_StopTurn = m_Gameplay.FindAction("StopTurn", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Tap = m_Menu.FindAction("Tap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -202,16 +174,14 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Tap;
-    private readonly InputAction m_Gameplay_Turn;
-    private readonly InputAction m_Gameplay_SharpTurn;
+    private readonly InputAction m_Gameplay_StartTurn;
+    private readonly InputAction m_Gameplay_StopTurn;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
         public GameplayActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Tap => m_Wrapper.m_Gameplay_Tap;
-        public InputAction @Turn => m_Wrapper.m_Gameplay_Turn;
-        public InputAction @SharpTurn => m_Wrapper.m_Gameplay_SharpTurn;
+        public InputAction @StartTurn => m_Wrapper.m_Gameplay_StartTurn;
+        public InputAction @StopTurn => m_Wrapper.m_Gameplay_StopTurn;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -221,41 +191,59 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Tap.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
-                @Tap.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
-                @Tap.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTap;
-                @Turn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
-                @Turn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
-                @Turn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTurn;
-                @SharpTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
-                @SharpTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
-                @SharpTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSharpTurn;
+                @StartTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartTurn;
+                @StartTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartTurn;
+                @StartTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartTurn;
+                @StopTurn.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopTurn;
+                @StopTurn.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopTurn;
+                @StopTurn.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopTurn;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @StartTurn.started += instance.OnStartTurn;
+                @StartTurn.performed += instance.OnStartTurn;
+                @StartTurn.canceled += instance.OnStartTurn;
+                @StopTurn.started += instance.OnStopTurn;
+                @StopTurn.performed += instance.OnStopTurn;
+                @StopTurn.canceled += instance.OnStopTurn;
+            }
+        }
+    }
+    public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Tap;
+    public struct MenuActions
+    {
+        private @GameInput m_Wrapper;
+        public MenuActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Tap => m_Wrapper.m_Menu_Tap;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Tap.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnTap;
+                @Tap.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnTap;
+                @Tap.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnTap;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Tap.started += instance.OnTap;
                 @Tap.performed += instance.OnTap;
                 @Tap.canceled += instance.OnTap;
-                @Turn.started += instance.OnTurn;
-                @Turn.performed += instance.OnTurn;
-                @Turn.canceled += instance.OnTurn;
-                @SharpTurn.started += instance.OnSharpTurn;
-                @SharpTurn.performed += instance.OnSharpTurn;
-                @SharpTurn.canceled += instance.OnSharpTurn;
             }
         }
     }
-    public GameplayActions @Gameplay => new GameplayActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
-    {
-        get
-        {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
-        }
-    }
+    public MenuActions @Menu => new MenuActions(this);
     private int m_MobileSchemeIndex = -1;
     public InputControlScheme MobileScheme
     {
@@ -267,8 +255,11 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     }
     public interface IGameplayActions
     {
+        void OnStartTurn(InputAction.CallbackContext context);
+        void OnStopTurn(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
         void OnTap(InputAction.CallbackContext context);
-        void OnTurn(InputAction.CallbackContext context);
-        void OnSharpTurn(InputAction.CallbackContext context);
     }
 }

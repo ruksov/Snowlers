@@ -1,15 +1,23 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Snowlers.Game.Player;
 using UnityEngine;
+using Zenject;
 
 namespace Snowlers.Player
 {
     public class PlayerRotator : MonoBehaviour
     {
-        [SerializeField] private PlayerMover m_mover;
+        private IPlayerMoveService m_playerMoveService;
 
+        [Inject]
+        private void Construct(IPlayerMoveService playerMoveService)
+        {
+            m_playerMoveService = playerMoveService;
+        }
+        
         private void Update()
         {
-            Vector3 moveDirection = m_mover.MoveDirection;
+            Vector3 moveDirection = m_playerMoveService.Velocity.normalized;
             if (moveDirection == Vector3.zero) 
                 return;
             
