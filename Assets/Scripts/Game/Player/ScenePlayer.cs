@@ -8,22 +8,17 @@ namespace Snowlers.Game.Player
 {
     public class ScenePlayer : MonoBehaviour
     {
-        private IPlayerState m_playerState;
         private IPlayerMover m_playerMover;
         private IInputService m_inputService;
 
         [SerializeField] private TextMeshProUGUI m_diedLabel;
         [SerializeField] private float m_shiftOriginThreshold;
         [SerializeField] private TrailRenderer m_trailRenderer;
-
-        public Action<float> OnShiftOrigin;
+        [SerializeField] private SpriteRenderer m_bodySprite;
 
         [Inject]
-        private void Construct(IPlayerState playerState, IPlayerMover playerMover, IInputService inputService)
+        private void Construct(IPlayerMover playerMover, IInputService inputService)
         {
-            m_playerState = playerState;
-            m_playerState.State = EPlayerState.Idle;
-            
             m_playerMover = playerMover;
             m_playerMover.SetPlayer(transform);
             
@@ -34,29 +29,26 @@ namespace Snowlers.Game.Player
             m_inputService.OnTap += OnTap;
         }
 
+        public void SetSkin(Sprite skin)
+        {
+            m_bodySprite.sprite = skin;
+        }
+
         private void OnEnable()
         {
-            OnShiftOrigin += OnShiftOriginCallback;
+            m_playerMover.OnShiftOrigin += OnShiftOriginCallback;
         }
 
         private void OnDisable()
         {
-            OnShiftOrigin -= OnShiftOriginCallback;
+            m_playerMover.OnShiftOrigin -= OnShiftOriginCallback;
         }
 
         private void OnDestroy()
         {
             m_inputService.OnTap -= OnTap;
         }
-        
-        private void Update()
-        {
-            if (transform.position.y < -m_shiftOriginThreshold)
-            {
-                OnShiftOrigin?.Invoke(m_shiftOriginThreshold);
-            }
-        }
-        
+
         private void OnTap()
         {
             m_inputService.Disable(EActions.Menu);

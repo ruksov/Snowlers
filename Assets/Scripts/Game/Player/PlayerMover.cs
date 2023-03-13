@@ -19,7 +19,8 @@ namespace Snowlers.Game.Player
         
         public Vector3 Velocity => m_velocity;
         public EMoveSide MoveSide => m_moveSide;
-        
+        public Transform PlayerTransfrom => m_playerTransform;
+
         private bool IsRightSide => MoveSide == EMoveSide.Right;
         private float MinVelocityX => m_playerSettings.minVelocityX * (IsRightSide ? 1 : -1);
         private float MaxVelocityX => m_playerSettings.maxVelocityX * (IsRightSide ? 1 : -1);
@@ -62,6 +63,8 @@ namespace Snowlers.Game.Player
             m_playerTransform = player;
         }
 
+        public event Action<float> OnShiftOrigin;
+
         public void Dispose()
         {
             SetActive(false);
@@ -77,11 +80,16 @@ namespace Snowlers.Game.Player
             {
                 m_velocity.x += AccelerationX * Time.deltaTime;
                 
-                if (Mathf.Abs(m_velocity.x) > Mathf.Abs(m_playerSettings.maxVelocityX))
-                    m_velocity.x = MaxVelocityX;
+                //if (Mathf.Abs(m_velocity.x) > Mathf.Abs(m_playerSettings.maxVelocityX))
+                    //m_velocity.x = MaxVelocityX;
             }
 
             m_playerTransform.position += m_velocity * Time.deltaTime;
+            
+            if (m_playerTransform.position.y < -m_playerSettings.shiftOriginThreshold)
+            {
+                OnShiftOrigin?.Invoke(-m_playerTransform.position.y);
+            }
         }
         
         private bool VelocityXLessThen(float value)

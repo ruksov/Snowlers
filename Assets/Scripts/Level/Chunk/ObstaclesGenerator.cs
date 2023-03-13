@@ -46,7 +46,7 @@ namespace Snowlers.Level.Chunk
         {
             m_obstaclesContainer = new GameObject(m_kObstaclesContainerName)
                 .With(_go => _go.transform.SetParent(transform, false))
-                .With(_go => _go.transform.localPosition += Vector3.left * ChunkData.size.x * 0.5f);
+                .With(_go => _go.transform.localPosition += Vector3.left * (ChunkData.size.x * 0.5f));
         }
         
         private void DestroyContainerObject()

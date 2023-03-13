@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Snowlers.Game.Player
@@ -12,9 +13,12 @@ namespace Snowlers.Game.Player
     {
         public Vector3 Velocity { get; }
         public EMoveSide MoveSide { get; }
+        public Transform PlayerTransfrom { get; }
 
         public void SetActive(bool isActive);
         public bool IsActive();
         public void SetPlayer(Transform player);
+        
+        public event Action<float> OnShiftOrigin;
     }
 }

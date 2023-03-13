@@ -13,13 +13,18 @@ namespace Snowlers.Common
         [SerializeField] bool m_useSceneOffset = false;
 
         private Vector3 m_offset;
+        
+        public void SetObject(Transform obj)
+        {
+            m_object = obj;
+        }
 
-        void Start()
+        private void Start()
         {
             m_offset = transform.position - m_object.position;
         }
 
-        void Update()
+        private void Update()
         {
             Vector3 newPosition = m_object.position;
 

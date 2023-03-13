@@ -16,3 +16,6 @@ MonoBehaviour:
   minVelocityX: 8
   maxVelocityX: 16
   accelerationX: 35
+  spawnPoint: {fileID: 0}
+  skin: {fileID: 21300000, guid: 2e0739baec0994c97aa5107df6e6f7c1, type: 3}
+  playerPrefab: {fileID: 8345110631099289148, guid: 076eb757158bd4d74b1a453a36edae3a, type: 3}

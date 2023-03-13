@@ -3,15 +3,17 @@ using Snowlers.Common.Extensions;
 using Snowlers.Game.Player;
 using Snowlers.Level.Chunk;
 using UnityEngine;
+using Zenject;
 
 namespace Snowlers.Level
 {
     public class LevelGenerator : MonoBehaviour
     {
-        [SerializeField] private ScenePlayer m_player;
         [SerializeField] private float m_playerOffset;
         [SerializeField] private SceneChunk m_chunkPrefab;
         [SerializeField] private uint m_chunksCount = 3;
+        
+        private IPlayerMover m_playerMover;
 
         private const string m_kChunksContainerName = "Chunks";
         
@@ -20,12 +22,18 @@ namespace Snowlers.Level
 
         private readonly Queue<SceneChunk> m_chunks = new();
 
+        [Inject]
+        public void Construct(IPlayerMover playerMover)
+        {
+            m_playerMover = playerMover;
+        }
+
         private void OnEnable()
         {
             CreateChunksContainer();
             GenerateChunks();
 
-            m_player.OnShiftOrigin += OnShiftOrigin;
+            m_playerMover.OnShiftOrigin += OnShiftOrigin;
         }
 
         private void OnShiftOrigin(float distanceToShift)
@@ -40,6 +48,7 @@ namespace Snowlers.Level
         private void OnDisable()
         {
             DestroyChunksContainer();
+            m_playerMover.OnShiftOrigin -= OnShiftOrigin;
         }
 
         private void Update()
@@ -50,7 +59,7 @@ namespace Snowlers.Level
             SceneChunk firstChunk = m_chunks.Peek();
             float thresholdPlayerY = firstChunk.transform.position.y - firstChunk.Data.size.y - m_playerOffset;
             
-            if (m_player.transform.position.y < thresholdPlayerY)
+            if (m_playerMover.PlayerTransfrom.position.y < thresholdPlayerY)
             {
                 Destroy(firstChunk.gameObject);
                 m_chunks.Dequeue();
