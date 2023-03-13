@@ -7,17 +7,17 @@ namespace Snowlers.Player
 {
     public class PlayerRotator : MonoBehaviour
     {
-        private IPlayerMoveService m_playerMoveService;
+        private IPlayerMover m_playerMover;
 
         [Inject]
-        private void Construct(IPlayerMoveService playerMoveService)
+        private void Construct(IPlayerMover playerMover)
         {
-            m_playerMoveService = playerMoveService;
+            m_playerMover = playerMover;
         }
         
         private void Update()
         {
-            Vector3 moveDirection = m_playerMoveService.Velocity.normalized;
+            Vector3 moveDirection = m_playerMover.Velocity.normalized;
             if (moveDirection == Vector3.zero) 
                 return;
             

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Snowlers.Level.Chunk
 {
-    public class Chunk : MonoBehaviour
+    public class SceneChunk : MonoBehaviour
     {
         [SerializeField] private ChunkData m_data = default;
         public ChunkData Data => m_data;

@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using Snowlers.Common.Extensions;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Snowlers.Level.Chunk
 {
     public class ObstaclesGenerator : MonoBehaviour
     {
-        [SerializeField] private Chunk m_chunk;
+        [FormerlySerializedAs("m_chunk")] [SerializeField] private SceneChunk sceneChunk;
         
         private const string m_kObstaclesContainerName = "Obstacles";
 
         private GameObject m_obstaclesContainer;
         private readonly List<Vector2Int> m_occupiedPositions = new();
 
-        private ChunkData ChunkData => m_chunk.Data;
+        private ChunkData ChunkData => sceneChunk.Data;
 
         private void OnEnable()
         {

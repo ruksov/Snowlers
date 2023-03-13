@@ -28,8 +28,8 @@ namespace Snowlers.Installers
                 .AsSingle();
 
             Container
-                .Bind(typeof(IPlayerMoveService), typeof(ITickable), typeof(IDisposable))
-                .To<PlayerMoveService>()
+                .Bind(typeof(IPlayerMover), typeof(ITickable), typeof(IDisposable))
+                .To<PlayerMover>()
                 .AsSingle();
         }
     }

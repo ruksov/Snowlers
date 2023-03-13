@@ -8,9 +8,13 @@ namespace Snowlers.Game.Player
         Left
     }
     
-    public interface IPlayerMoveService
+    public interface IPlayerMover
     {
         public Vector3 Velocity { get; }
         public EMoveSide MoveSide { get; }
+
+        public void SetActive(bool isActive);
+        public bool IsActive();
+        public void SetPlayer(Transform player);
     }
 }

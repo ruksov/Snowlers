@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa42456d74a47028e3fc91ab9e6eb65, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  velocityY: 12
+  velocityY: -16
   minVelocityX: 8
   maxVelocityX: 16
-  accelerationX: 40
+  accelerationX: 35
