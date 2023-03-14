@@ -1,18 +1,12 @@
 using System;
-using Snowlers.Common;
-using Snowlers.Game.Player;
 using Snowlers.Game.Player.Factory;
-using UnityEngine;
+using Snowlers.Game.Player.Movement;
 using Zenject;
 
 namespace Snowlers.Installers
 {
     public class GameInstaller : MonoInstaller, IInitializable
     {
-        [SerializeField] private Transform m_playerStart;
-        [SerializeField] private ObjectFollower m_camera;
-        [SerializeField] private PlayerSettings m_playerSettings;
-        
         public override void InstallBindings()
         {
             InstallInstaller_Hack();
@@ -29,13 +23,10 @@ namespace Snowlers.Installers
 
         private void InstallPlayer()
         {
-            m_playerSettings.spawnPoint = m_playerStart;
-            m_playerSettings.camera = m_camera;
-            
             Container
-                .Bind<PlayerSettings>()
-                .FromInstance(m_playerSettings)
-                .AsSingle();
+                .Bind<StartPoint>()
+                .FromComponentInHierarchy()
+                .AsCached();
 
             Container
                 .Bind<PlayerFactory>()

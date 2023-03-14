@@ -1,6 +1,6 @@
 using System;
+using Snowlers.Game.Player.Movement;
 using Snowlers.Input;
-using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -8,16 +8,20 @@ namespace Snowlers.Game.Player
 {
     public class ScenePlayer : MonoBehaviour
     {
+        [Serializable]
+        public class Settings
+        {
+            public Sprite skin;
+        }
+        
         private IPlayerMover m_playerMover;
         private IInputService m_inputService;
 
-        [SerializeField] private TextMeshProUGUI m_diedLabel;
-        [SerializeField] private float m_shiftOriginThreshold;
         [SerializeField] private TrailRenderer m_trailRenderer;
         [SerializeField] private SpriteRenderer m_bodySprite;
 
         [Inject]
-        private void Construct(IPlayerMover playerMover, IInputService inputService)
+        private void Construct(IPlayerMover playerMover, IInputService inputService, Settings settings)
         {
             m_playerMover = playerMover;
             m_playerMover.SetPlayer(transform);
@@ -27,11 +31,8 @@ namespace Snowlers.Game.Player
             m_inputService.Disable(EActions.Gameplay);
             m_inputService.Enable(EActions.Menu);
             m_inputService.OnTap += OnTap;
-        }
 
-        public void SetSkin(Sprite skin)
-        {
-            m_bodySprite.sprite = skin;
+            m_bodySprite.sprite = settings.skin;
         }
 
         private void OnEnable()
@@ -58,7 +59,6 @@ namespace Snowlers.Game.Player
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            m_diedLabel.gameObject.SetActive(true);
             m_inputService.Disable();
             m_playerMover.SetActive(false);
         }

@@ -4,12 +4,22 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Snowlers.Game.Player
+namespace Snowlers.Game.Player.Movement
 {
     public class PlayerMover : IPlayerMover, ITickable, IDisposable
     {
+        [Serializable]
+        public class Settings
+        {
+            public float velocityY = 5.0f;
+            public float minVelocityX = 8.0f;
+            public float maxVelocityX = 16.0f;
+            public float accelerationX = 60.0f;
+            public float shiftOriginThreshold = 100.0f;
+        }
+        
         private readonly IInputService m_inputService;
-        private readonly PlayerSettings m_playerSettings;
+        private readonly Settings m_settings;
 
         private bool m_isActive;
         private Vector3 m_velocity = Vector3.zero;
@@ -19,17 +29,19 @@ namespace Snowlers.Game.Player
         
         public Vector3 Velocity => m_velocity;
         public EMoveSide MoveSide => m_moveSide;
-        public Transform PlayerTransfrom => m_playerTransform;
+        public Transform PlayerTransform => m_playerTransform;
+        public event Action<float> OnShiftOrigin;
+
 
         private bool IsRightSide => MoveSide == EMoveSide.Right;
-        private float MinVelocityX => m_playerSettings.minVelocityX * (IsRightSide ? 1 : -1);
-        private float MaxVelocityX => m_playerSettings.maxVelocityX * (IsRightSide ? 1 : -1);
-        private float AccelerationX => m_playerSettings.accelerationX * (IsRightSide ? 1 : -1);
+        private float MinVelocityX => m_settings.minVelocityX * (IsRightSide ? 1 : -1);
+        private float MaxVelocityX => m_settings.maxVelocityX * (IsRightSide ? 1 : -1);
+        private float AccelerationX => m_settings.accelerationX * (IsRightSide ? 1 : -1);
 
-        public PlayerMover(IInputService inputService, PlayerSettings playerSettings)
+        public PlayerMover(IInputService inputService, Settings settings)
         {
             m_inputService = inputService;
-            m_playerSettings = playerSettings;
+            m_settings = settings;
         }
 
         public void SetActive(bool isActive)
@@ -41,7 +53,7 @@ namespace Snowlers.Game.Player
                 m_inputService.OnStartTurn += OnStartTurn;
                 m_inputService.OnStopTurn += OnStopTurn;
                 
-                m_velocity.y = m_playerSettings.velocityY;
+                m_velocity.y = m_settings.velocityY;
                 m_moveSide = Random.Range(0, 2) == 0 ? EMoveSide.Right : EMoveSide.Left;
             }
             else
@@ -63,8 +75,6 @@ namespace Snowlers.Game.Player
             m_playerTransform = player;
         }
 
-        public event Action<float> OnShiftOrigin;
-
         public void Dispose()
         {
             SetActive(false);
@@ -79,14 +89,11 @@ namespace Snowlers.Game.Player
                 (m_turnPressed && VelocityXLessThen(MaxVelocityX)))
             {
                 m_velocity.x += AccelerationX * Time.deltaTime;
-                
-                //if (Mathf.Abs(m_velocity.x) > Mathf.Abs(m_playerSettings.maxVelocityX))
-                    //m_velocity.x = MaxVelocityX;
             }
 
             m_playerTransform.position += m_velocity * Time.deltaTime;
             
-            if (m_playerTransform.position.y < -m_playerSettings.shiftOriginThreshold)
+            if (m_playerTransform.position.y < -m_settings.shiftOriginThreshold)
             {
                 OnShiftOrigin?.Invoke(-m_playerTransform.position.y);
             }

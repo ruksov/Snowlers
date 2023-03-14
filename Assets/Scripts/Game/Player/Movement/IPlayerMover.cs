@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Snowlers.Game.Player
+namespace Snowlers.Game.Player.Movement
 {
     public enum EMoveSide
     {
@@ -13,7 +13,7 @@ namespace Snowlers.Game.Player
     {
         public Vector3 Velocity { get; }
         public EMoveSide MoveSide { get; }
-        public Transform PlayerTransfrom { get; }
+        public Transform PlayerTransform { get; }
 
         public void SetActive(bool isActive);
         public bool IsActive();

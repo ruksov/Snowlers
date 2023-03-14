@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Snowlers.Common.Extensions;
 using Snowlers.Game.Player;
+using Snowlers.Game.Player.Movement;
 using Snowlers.Level.Chunk;
 using UnityEngine;
 using Zenject;
@@ -59,7 +60,7 @@ namespace Snowlers.Level
             SceneChunk firstChunk = m_chunks.Peek();
             float thresholdPlayerY = firstChunk.transform.position.y - firstChunk.Data.size.y - m_playerOffset;
             
-            if (m_playerMover.PlayerTransfrom.position.y < thresholdPlayerY)
+            if (m_playerMover.PlayerTransform.position.y < thresholdPlayerY)
             {
                 Destroy(firstChunk.gameObject);
                 m_chunks.Dequeue();

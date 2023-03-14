@@ -1,9 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Snowlers.Game.Player;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
-namespace Snowlers.Player
+namespace Snowlers.Game.Player.Movement
 {
     public class PlayerRotator : MonoBehaviour
     {
