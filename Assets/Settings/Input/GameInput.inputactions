@@ -2,61 +2,13 @@
     "name": "GameInput",
     "maps": [
         {
-            "name": "Gameplay",
+            "name": "Game",
             "id": "e8aedb34-9457-4baf-8d37-73337beb517a",
-            "actions": [
-                {
-                    "name": "StartTurn",
-                    "type": "Button",
-                    "id": "c180e6c0-6176-4064-9371-ecd1cf66343a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "StopTurn",
-                    "type": "Button",
-                    "id": "2cd2e86d-6f96-4d88-8df3-d001fe26a6aa",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=1)",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "941c27a6-3655-4b7e-b148-fa28cfd330ae",
-                    "path": "<Touchscreen>/primaryTouch/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StartTurn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "28540d29-dbf1-4a6b-831a-fbef46e78cd2",
-                    "path": "<Touchscreen>/primaryTouch/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StopTurn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Menu",
-            "id": "8c5b54fa-ecc8-44c6-9cca-05085d53eddb",
             "actions": [
                 {
                     "name": "Tap",
                     "type": "Button",
-                    "id": "917041ca-922a-4194-b465-0119bf73e0b9",
+                    "id": "145e7ba1-4c0f-406c-bcf2-8ba3b7335a06",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Tap",
@@ -66,7 +18,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "394a8f44-cce7-421e-b25a-59d48f87bccd",
+                    "id": "979c2d5a-b32d-4ec4-900a-6d1743f62474",
                     "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
