@@ -1,7 +1,7 @@
 using Snowlers.Infrastructure.GameStates.Factory;
 using Snowlers.Infrastructure.GameStates.Machine;
 using Snowlers.Infrastructure.GameStates.States;
-using Snowlers.Infrastructure.Input;
+using Snowlers.Infrastructure.Services.Input;
 using Snowlers.Infrastructure.Services.SceneLoader;
 using Zenject;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Snowlers.Infrastructure.Input
+namespace Snowlers.Infrastructure.Services.Input
 {
     public interface IInputService
     {
