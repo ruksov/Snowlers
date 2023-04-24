@@ -13,6 +13,7 @@ namespace Snowlers.Infrastructure.Services.Input
         {
             m_gameInput = new();
             m_gameInput.Game.SetCallbacks(this);
+            m_gameInput.Enable();
         }
         
         public void Enable()
