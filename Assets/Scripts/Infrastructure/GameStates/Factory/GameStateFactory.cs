@@ -9,9 +9,7 @@ namespace Snowlers.Infrastructure.GameStates.Factory
     public GameStateFactory(DiContainer container) => 
       m_container = container;
 
-    public IExitableGameState State<TState>() where TState : IExitableGameState
-    {
-      return m_container.Resolve<TState>();
-    }
+    public IExitableGameState State<TState>() where TState : IExitableGameState => 
+      m_container.Resolve<TState>();
   }
 }

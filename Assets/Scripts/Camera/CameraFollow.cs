@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Snowlers.Infrastructure.Camera
+namespace Snowlers.Camera
 {
   public class CameraFollow : MonoBehaviour
   {

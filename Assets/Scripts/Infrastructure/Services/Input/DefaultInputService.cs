@@ -11,7 +11,7 @@ namespace Snowlers.Infrastructure.Services.Input
 
         public DefaultInputService()
         {
-            m_gameInput = new();
+            m_gameInput = new GameInput();
             m_gameInput.Game.SetCallbacks(this);
             m_gameInput.Enable();
         }

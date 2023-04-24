@@ -1,14 +1,16 @@
+using System.Collections;
 using Snowlers.Infrastructure.Services.Input;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Snowlers.Infrastructure.Player
+namespace Snowlers.Player
 {
   public class PlayerMove : MonoBehaviour
   {
     public float MoveSpeedY;
     public float MoveSpeedX;
+    public float AccelerationX;
     
     private IInputService m_input;
     private bool m_moveToRight;
@@ -35,7 +37,25 @@ namespace Snowlers.Infrastructure.Player
     private void ChangeSide()
     {
       m_moveToRight = !m_moveToRight;
-      m_moveVector = CreateMoveVector();
+
+      StopAllCoroutines();
+      
+      Vector3 targetMoveVector = CreateMoveVector();
+      StartCoroutine(SmoothChangeSide(targetMoveVector));
+    }
+
+    private IEnumerator SmoothChangeSide(Vector3 targetMoveVector)
+    {
+      float accelerationX = m_moveToRight ? AccelerationX : -AccelerationX;
+
+      do
+      {
+        m_moveVector.x += accelerationX * Time.deltaTime;
+        yield return null;
+      } 
+      while (targetMoveVector.magnitude > m_moveVector.magnitude);
+
+      m_moveVector = targetMoveVector;
     }
 
     private Vector3 CreateMoveVector()

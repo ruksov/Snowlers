@@ -345,38 +345,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Time
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
-      value: 0.7154506
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
-      value: 0.9539296
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 821839787813806541, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1506898584330663729, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -420,10 +388,6 @@ PrefabInstance:
     - target: {fileID: 1506898584330663729, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1597302555290161110, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
-      propertyPath: MoveSpeedX
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2741434587174440476, guid: 26082ea50b2894a22aff35e8918aeacc, type: 3}
       propertyPath: m_Name

@@ -3,7 +3,7 @@ using Snowlers.Infrastructure.GameStates.States;
 using UnityEngine;
 using Zenject;
 
-namespace Snowlers.Infrastructure.Services
+namespace Snowlers.Infrastructure
 {
   public class Bootstrapper : MonoBehaviour
   {

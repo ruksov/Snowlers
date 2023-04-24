@@ -15,18 +15,14 @@ namespace Snowlers.Infrastructure.GameStates.States
       m_stateMachine = stateMachine;
     }
 
-    public void Enter(string sceneName)
-    {
+    public void Enter(string sceneName) => 
       m_sceneLoader.Load(sceneName, OnLoaded);
-    }
-
-    private void OnLoaded()
-    {
-      m_stateMachine.Enter<GameLoopState>();
-    }
 
     public void Exit()
     {
     }
+
+    private void OnLoaded() => 
+      m_stateMachine.Enter<GameLoopState>();
   }
 }
